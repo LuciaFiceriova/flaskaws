@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{%block title %} Home {% endblock %}
+
+{% block body %}
+    <body class="custom-background">
+        <style>
+            .custom-background{
+                background-color:rgb(253, 194, 194);
+            }
+        </style>
+    </body>
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success" role=""alert>
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <table class="table table-info table=striped table-hover" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in members %}
+                    <tr>
+                        <td>{{member.id}}</td>
+                        <td>{{member.name}}</td>
+                        <td>{{member.role}}</td>
+                        <td>
+                            <a href="/delete/{{member.id}}" class="btn btn-light btn-outline-danger" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
